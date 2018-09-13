@@ -6,10 +6,9 @@
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/qgis2web.css">
         <link rel="stylesheet" href="css/Control.OSMGeocoder.css">
-        <link rel="stylesheet" href="css/leaflet-measure.css">
         <style>
         html, body, #map {
             width: 100%;
@@ -24,7 +23,7 @@
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.js"></script>
         <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
@@ -34,9 +33,8 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/Control.OSMGeocoder.js"></script>
-        <script src="js/leaflet-measure.js"></script>
-        <script src="data/OtherSteakHousesbySalesVolumeinthousands_1.js"></script>
-        <script src="data/RuthsChrisSteakHouses_2.js"></script>
+        <script src="data/OtherSteakHousesbySalesVolumeinthousands_2.js"></script>
+        <script src="data/RuthsChrisSteakHouses_3.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -55,26 +53,22 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[25.7238326963,-81.1294968105],[26.8428164464,-79.1905031897]]);
+        }).fitBounds([[26.3430913012,-80.1719505654],[26.3916923569,-80.0828301836]]);
         var hash = new L.Hash(map);
         map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
-        L.control.locate().addTo(map);
-        var measureControl = new L.Control.Measure({
-            primaryLengthUnit: 'feet',
-            secondaryLengthUnit: 'miles',
-            primaryAreaUnit: 'sqfeet',
-            secondaryAreaUnit: 'sqmiles'
-        });
-        measureControl.addTo(map);
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        var overlay_MapboxStreetsv10_0 = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA', {
+        var overlay_GoogleSatelliteHybrid_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
             opacity: 1.0
         });
-        overlay_MapboxStreetsv10_0.addTo(map);
-        map.addLayer(overlay_MapboxStreetsv10_0);
-        function pop_OtherSteakHousesbySalesVolumeinthousands_1(feature, layer) {
+        overlay_GoogleSatelliteHybrid_0.addTo(map);
+        var overlay_Streets_1 = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA', {
+            opacity: 1.0
+        });
+        overlay_Streets_1.addTo(map);
+        map.addLayer(overlay_Streets_1);
+        function pop_OtherSteakHousesbySalesVolumeinthousands_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -85,13 +79,16 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LOCNUM'] !== null ? Autolinker.link(String(feature.properties['LOCNUM'])) : '') + '</td>\
+                        <th scope="row">LOCNUM</th>\
+                        <td>' + (feature.properties['LOCNUM'] !== null ? Autolinker.link(String(feature.properties['LOCNUM'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CONAME</strong><br />' + (feature.properties['CONAME'] !== null ? Autolinker.link(String(feature.properties['CONAME'])) : '') + '</td>\
+                        <th scope="row">CONAME</th>\
+                        <td>' + (feature.properties['CONAME'] !== null ? Autolinker.link(String(feature.properties['CONAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">STREET</th>\
@@ -106,44 +103,52 @@
                         <td>' + (feature.properties['STATE'] !== null ? Autolinker.link(String(feature.properties['STATE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['STATE_NAME'] !== null ? Autolinker.link(String(feature.properties['STATE_NAME'])) : '') + '</td>\
+                        <th scope="row">STATE_NAME</th>\
+                        <td>' + (feature.properties['STATE_NAME'] !== null ? Autolinker.link(String(feature.properties['STATE_NAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">ZIP</th>\
                         <td>' + (feature.properties['ZIP'] !== null ? Autolinker.link(String(feature.properties['ZIP'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ZIP4'] !== null ? Autolinker.link(String(feature.properties['ZIP4'])) : '') + '</td>\
+                        <th scope="row">ZIP4</th>\
+                        <td>' + (feature.properties['ZIP4'] !== null ? Autolinker.link(String(feature.properties['ZIP4'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['NAICS'] !== null ? Autolinker.link(String(feature.properties['NAICS'])) : '') + '</td>\
+                        <th scope="row">NAICS</th>\
+                        <td>' + (feature.properties['NAICS'] !== null ? Autolinker.link(String(feature.properties['NAICS'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['SIC'] !== null ? Autolinker.link(String(feature.properties['SIC'])) : '') + '</td>\
+                        <th scope="row">SIC</th>\
+                        <td>' + (feature.properties['SIC'] !== null ? Autolinker.link(String(feature.properties['SIC'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">SALESVOL</th>\
                         <td>' + (feature.properties['SALESVOL'] !== null ? Autolinker.link(String(feature.properties['SALESVOL'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['HDBRCH'] !== null ? Autolinker.link(String(feature.properties['HDBRCH'])) : '') + '</td>\
+                        <th scope="row">HDBRCH</th>\
+                        <td>' + (feature.properties['HDBRCH'] !== null ? Autolinker.link(String(feature.properties['HDBRCH'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">EMPNUM</th>\
                         <td>' + (feature.properties['EMPNUM'] !== null ? Autolinker.link(String(feature.properties['EMPNUM'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['FRNCOD'] !== null ? Autolinker.link(String(feature.properties['FRNCOD'])) : '') + '</td>\
+                        <th scope="row">FRNCOD</th>\
+                        <td>' + (feature.properties['FRNCOD'] !== null ? Autolinker.link(String(feature.properties['FRNCOD'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ISCODE'] !== null ? Autolinker.link(String(feature.properties['ISCODE'])) : '') + '</td>\
+                        <th scope="row">ISCODE</th>\
+                        <td>' + (feature.properties['ISCODE'] !== null ? Autolinker.link(String(feature.properties['ISCODE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">SQFTCODE</th>\
                         <td>' + (feature.properties['SQFTCODE'] !== null ? Autolinker.link(String(feature.properties['SQFTCODE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LOC_NAME'] !== null ? Autolinker.link(String(feature.properties['LOC_NAME'])) : '') + '</td>\
+                        <th scope="row">LOC_NAME</th>\
+                        <td>' + (feature.properties['LOC_NAME'] !== null ? Autolinker.link(String(feature.properties['LOC_NAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">STATUS</th>\
@@ -161,10 +166,10 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_OtherSteakHousesbySalesVolumeinthousands_1_0(feature) {
+        function style_OtherSteakHousesbySalesVolumeinthousands_2_0(feature) {
             if (feature.properties['SALESVOL'] >= 0.000000 && feature.properties['SALESVOL'] <= 522.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 2.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -179,7 +184,7 @@
             }
             if (feature.properties['SALESVOL'] >= 522.000000 && feature.properties['SALESVOL'] <= 1303.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -194,7 +199,7 @@
             }
             if (feature.properties['SALESVOL'] >= 1303.000000 && feature.properties['SALESVOL'] <= 2109.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 6.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -209,7 +214,7 @@
             }
             if (feature.properties['SALESVOL'] >= 2109.000000 && feature.properties['SALESVOL'] <= 2899.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 8.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -224,7 +229,7 @@
             }
             if (feature.properties['SALESVOL'] >= 2899.000000 && feature.properties['SALESVOL'] <= 3426.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 10.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -239,7 +244,7 @@
             }
             if (feature.properties['SALESVOL'] >= 3426.000000 && feature.properties['SALESVOL'] <= 4480.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 12.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -254,7 +259,7 @@
             }
             if (feature.properties['SALESVOL'] >= 4480.000000 && feature.properties['SALESVOL'] <= 5271.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 14.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -269,7 +274,7 @@
             }
             if (feature.properties['SALESVOL'] >= 5271.000000 && feature.properties['SALESVOL'] <= 7790.000000 ) {
                 return {
-                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
+                pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
                 radius: 16.0,
                 opacity: 1,
                 color: 'rgba(0,0,0,0.7)',
@@ -283,24 +288,24 @@
             }
             }
         }
-        map.createPane('pane_OtherSteakHousesbySalesVolumeinthousands_1');
-        map.getPane('pane_OtherSteakHousesbySalesVolumeinthousands_1').style.zIndex = 401;
-        map.getPane('pane_OtherSteakHousesbySalesVolumeinthousands_1').style['mix-blend-mode'] = 'normal';
-        var layer_OtherSteakHousesbySalesVolumeinthousands_1 = new L.geoJson(json_OtherSteakHousesbySalesVolumeinthousands_1, {
+        map.createPane('pane_OtherSteakHousesbySalesVolumeinthousands_2');
+        map.getPane('pane_OtherSteakHousesbySalesVolumeinthousands_2').style.zIndex = 402;
+        map.getPane('pane_OtherSteakHousesbySalesVolumeinthousands_2').style['mix-blend-mode'] = 'normal';
+        var layer_OtherSteakHousesbySalesVolumeinthousands_2 = new L.geoJson(json_OtherSteakHousesbySalesVolumeinthousands_2, {
             attribution: '<a href=""></a>',
-            pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_1',
-            onEachFeature: pop_OtherSteakHousesbySalesVolumeinthousands_1,
+            pane: 'pane_OtherSteakHousesbySalesVolumeinthousands_2',
+            onEachFeature: pop_OtherSteakHousesbySalesVolumeinthousands_2,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_OtherSteakHousesbySalesVolumeinthousands_1_0(feature));
+                return L.circleMarker(latlng, style_OtherSteakHousesbySalesVolumeinthousands_2_0(feature));
             },
         });
-        bounds_group.addLayer(layer_OtherSteakHousesbySalesVolumeinthousands_1);
-        map.addLayer(layer_OtherSteakHousesbySalesVolumeinthousands_1);
-        function pop_RuthsChrisSteakHouses_2(feature, layer) {
+        bounds_group.addLayer(layer_OtherSteakHousesbySalesVolumeinthousands_2);
+        map.addLayer(layer_OtherSteakHousesbySalesVolumeinthousands_2);
+        function pop_RuthsChrisSteakHouses_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -311,13 +316,16 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                        <th scope="row">OBJECTID</th>\
+                        <td>' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LOCNUM'] !== null ? Autolinker.link(String(feature.properties['LOCNUM'])) : '') + '</td>\
+                        <th scope="row">LOCNUM</th>\
+                        <td>' + (feature.properties['LOCNUM'] !== null ? Autolinker.link(String(feature.properties['LOCNUM'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>CONAME</strong><br />' + (feature.properties['CONAME'] !== null ? Autolinker.link(String(feature.properties['CONAME'])) : '') + '</td>\
+                        <th scope="row">CONAME</th>\
+                        <td>' + (feature.properties['CONAME'] !== null ? Autolinker.link(String(feature.properties['CONAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">STREET</th>\
@@ -332,60 +340,73 @@
                         <td>' + (feature.properties['STATE'] !== null ? Autolinker.link(String(feature.properties['STATE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['STATE_NAME'] !== null ? Autolinker.link(String(feature.properties['STATE_NAME'])) : '') + '</td>\
+                        <th scope="row">STATE_NAME</th>\
+                        <td>' + (feature.properties['STATE_NAME'] !== null ? Autolinker.link(String(feature.properties['STATE_NAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">ZIP</th>\
                         <td>' + (feature.properties['ZIP'] !== null ? Autolinker.link(String(feature.properties['ZIP'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ZIP4'] !== null ? Autolinker.link(String(feature.properties['ZIP4'])) : '') + '</td>\
+                        <th scope="row">ZIP4</th>\
+                        <td>' + (feature.properties['ZIP4'] !== null ? Autolinker.link(String(feature.properties['ZIP4'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['NAICS'] !== null ? Autolinker.link(String(feature.properties['NAICS'])) : '') + '</td>\
+                        <th scope="row">NAICS</th>\
+                        <td>' + (feature.properties['NAICS'] !== null ? Autolinker.link(String(feature.properties['NAICS'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['SIC'] !== null ? Autolinker.link(String(feature.properties['SIC'])) : '') + '</td>\
+                        <th scope="row">SIC</th>\
+                        <td>' + (feature.properties['SIC'] !== null ? Autolinker.link(String(feature.properties['SIC'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['SALESVOL'] !== null ? Autolinker.link(String(feature.properties['SALESVOL'])) : '') + '</td>\
+                        <th scope="row">SALESVOL</th>\
+                        <td>' + (feature.properties['SALESVOL'] !== null ? Autolinker.link(String(feature.properties['SALESVOL'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['HDBRCH'] !== null ? Autolinker.link(String(feature.properties['HDBRCH'])) : '') + '</td>\
+                        <th scope="row">HDBRCH</th>\
+                        <td>' + (feature.properties['HDBRCH'] !== null ? Autolinker.link(String(feature.properties['HDBRCH'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['EMPNUM'] !== null ? Autolinker.link(String(feature.properties['EMPNUM'])) : '') + '</td>\
+                        <th scope="row">EMPNUM</th>\
+                        <td>' + (feature.properties['EMPNUM'] !== null ? Autolinker.link(String(feature.properties['EMPNUM'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['FRNCOD'] !== null ? Autolinker.link(String(feature.properties['FRNCOD'])) : '') + '</td>\
+                        <th scope="row">FRNCOD</th>\
+                        <td>' + (feature.properties['FRNCOD'] !== null ? Autolinker.link(String(feature.properties['FRNCOD'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['ISCODE'] !== null ? Autolinker.link(String(feature.properties['ISCODE'])) : '') + '</td>\
+                        <th scope="row">ISCODE</th>\
+                        <td>' + (feature.properties['ISCODE'] !== null ? Autolinker.link(String(feature.properties['ISCODE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">SQFTCODE</th>\
                         <td>' + (feature.properties['SQFTCODE'] !== null ? Autolinker.link(String(feature.properties['SQFTCODE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['LOC_NAME'] !== null ? Autolinker.link(String(feature.properties['LOC_NAME'])) : '') + '</td>\
+                        <th scope="row">LOC_NAME</th>\
+                        <td>' + (feature.properties['LOC_NAME'] !== null ? Autolinker.link(String(feature.properties['LOC_NAME'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['STATUS'] !== null ? Autolinker.link(String(feature.properties['STATUS'])) : '') + '</td>\
+                        <th scope="row">STATUS</th>\
+                        <td>' + (feature.properties['STATUS'] !== null ? Autolinker.link(String(feature.properties['STATUS'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['SCORE'] !== null ? Autolinker.link(String(feature.properties['SCORE'])) : '') + '</td>\
+                        <th scope="row">SCORE</th>\
+                        <td>' + (feature.properties['SCORE'] !== null ? Autolinker.link(String(feature.properties['SCORE'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['SOURCE'] !== null ? Autolinker.link(String(feature.properties['SOURCE'])) : '') + '</td>\
+                        <th scope="row">SOURCE</th>\
+                        <td>' + (feature.properties['SOURCE'] !== null ? Autolinker.link(String(feature.properties['SOURCE'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_RuthsChrisSteakHouses_2_0() {
+        function style_RuthsChrisSteakHouses_3_0() {
             return {
-                pane: 'pane_RuthsChrisSteakHouses_2',
-                radius: 16.0,
+                pane: 'pane_RuthsChrisSteakHouses_3',
+                radius: 14.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -397,23 +418,23 @@
                 fillColor: 'rgba(227,26,28,1.0)',
             }
         }
-        map.createPane('pane_RuthsChrisSteakHouses_2');
-        map.getPane('pane_RuthsChrisSteakHouses_2').style.zIndex = 402;
-        map.getPane('pane_RuthsChrisSteakHouses_2').style['mix-blend-mode'] = 'normal';
-        var layer_RuthsChrisSteakHouses_2 = new L.geoJson(json_RuthsChrisSteakHouses_2, {
+        map.createPane('pane_RuthsChrisSteakHouses_3');
+        map.getPane('pane_RuthsChrisSteakHouses_3').style.zIndex = 403;
+        map.getPane('pane_RuthsChrisSteakHouses_3').style['mix-blend-mode'] = 'normal';
+        var layer_RuthsChrisSteakHouses_3 = new L.geoJson(json_RuthsChrisSteakHouses_3, {
             attribution: '<a href=""></a>',
-            pane: 'pane_RuthsChrisSteakHouses_2',
-            onEachFeature: pop_RuthsChrisSteakHouses_2,
+            pane: 'pane_RuthsChrisSteakHouses_3',
+            onEachFeature: pop_RuthsChrisSteakHouses_3,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.shapeMarker(latlng, style_RuthsChrisSteakHouses_2_0(feature));
+                return L.shapeMarker(latlng, style_RuthsChrisSteakHouses_3_0(feature));
             },
         });
-        bounds_group.addLayer(layer_RuthsChrisSteakHouses_2);
-        map.addLayer(layer_RuthsChrisSteakHouses_2);
+        bounds_group.addLayer(layer_RuthsChrisSteakHouses_3);
+        map.addLayer(layer_RuthsChrisSteakHouses_3);
         var osmGeocoder = new L.Control.OSMGeocoder({
             collapsed: false,
             position: 'topright',
@@ -421,8 +442,91 @@
         });
         osmGeocoder.addTo(map);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/RuthsChrisSteakHouses_2.png" /> Ruth\'s Chris Steak Houses': layer_RuthsChrisSteakHouses_2,'Other Steak Houses (by Sales Volume, $ in thousands)<br /><table><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_05220.png" /></td><td> 0 - 522 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_52213031.png" /></td><td> 522 - 1303 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_130321092.png" /></td><td> 1303 - 2109 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_210928993.png" /></td><td> 2109 - 2899 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_289934264.png" /></td><td> 2899 - 3426 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_342644805.png" /></td><td> 3426 - 4480 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_448052716.png" /></td><td> 4480 - 5271 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_1_527177907.png" /></td><td> 5271 - 7790 </td></tr></table>': layer_OtherSteakHousesbySalesVolumeinthousands_1,"Mapbox Streets v10": overlay_MapboxStreetsv10_0,}).addTo(map);
+        L.control.layers(baseMaps,{'<img src="legend/RuthsChrisSteakHouses_3.png" /> Ruth\'s Chris Steak Houses': layer_RuthsChrisSteakHouses_3,'Other Steak Houses (by Sales Volume, $ in thousands)<br /><table><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_05220.png" /></td><td> 0 - 522 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_52213031.png" /></td><td> 522 - 1303 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_130321092.png" /></td><td> 1303 - 2109 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_210928993.png" /></td><td> 2109 - 2899 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_289934264.png" /></td><td> 2899 - 3426 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_342644805.png" /></td><td> 3426 - 4480 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_448052716.png" /></td><td> 4480 - 5271 </td></tr><tr><td style="text-align: center;"><img src="legend/OtherSteakHousesbySalesVolumeinthousands_2_527177907.png" /></td><td> 5271 - 7790 </td></tr></table>': layer_OtherSteakHousesbySalesVolumeinthousands_2,"Streets": overlay_Streets_1,"Google Satellite Hybrid": overlay_GoogleSatelliteHybrid_0,}).addTo(map);
+        map.on("zoomend", function(){
+
+            if (map.hasLayer(layer_OtherSteakHousesbySalesVolumeinthousands_2)) {
+                if (map.getZoom() <= 19 && map.getZoom() >= 10) {
+                    layer_OtherSteakHousesbySalesVolumeinthousands_2.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_OtherSteakHousesbySalesVolumeinthousands_2.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_RuthsChrisSteakHouses_3)) {
+                if (map.getZoom() <= 19 && map.getZoom() >= 5) {
+                    layer_RuthsChrisSteakHouses_3.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_RuthsChrisSteakHouses_3.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+        });
         setBounds();
+        var i = 0;
+        layer_OtherSteakHousesbySalesVolumeinthousands_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['CONAME'] !== null?String('<div style="color: #000000; font-size: 7pt; font-family: \'Aaux Next Bold Italic\', sans-serif;">' + layer.feature.properties['CONAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_OtherSteakHousesbySalesVolumeinthousands_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_RuthsChrisSteakHouses_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['CONAME'] !== null?String('<div style="color: #000000; font-size: 8pt; font-family: \'Aaux Next Black\', sans-serif;">' + layer.feature.properties['CONAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_RuthsChrisSteakHouses_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+            if (map.hasLayer(layer_OtherSteakHousesbySalesVolumeinthousands_2)) {
+                if (map.getZoom() <= 19 && map.getZoom() >= 10) {
+                    layer_OtherSteakHousesbySalesVolumeinthousands_2.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_OtherSteakHousesbySalesVolumeinthousands_2.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+            if (map.hasLayer(layer_RuthsChrisSteakHouses_3)) {
+                if (map.getZoom() <= 19 && map.getZoom() >= 5) {
+                    layer_RuthsChrisSteakHouses_3.eachLayer(function (layer) {
+                        layer.openTooltip();
+                    });
+                } else {
+                    layer_RuthsChrisSteakHouses_3.eachLayer(function (layer) {
+                        layer.closeTooltip();
+                    });
+                }
+            }
+        resetLabels([layer_OtherSteakHousesbySalesVolumeinthousands_2,layer_RuthsChrisSteakHouses_3]);
+        map.on("zoomend", function(){
+            resetLabels([layer_OtherSteakHousesbySalesVolumeinthousands_2,layer_RuthsChrisSteakHouses_3]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_OtherSteakHousesbySalesVolumeinthousands_2,layer_RuthsChrisSteakHouses_3]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_OtherSteakHousesbySalesVolumeinthousands_2,layer_RuthsChrisSteakHouses_3]);
+        });
         </script>
     </body>
 </html>

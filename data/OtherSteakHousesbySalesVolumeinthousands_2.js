@@ -1,6 +1,6 @@
-var json_OtherSteakHousesbySalesVolumeinthousands_1 = {
+var json_OtherSteakHousesbySalesVolumeinthousands_2 = {
 "type": "FeatureCollection",
-"name": "OtherSteakHousesbySalesVolumeinthousands_1",
+"name": "OtherSteakHousesbySalesVolumeinthousands_2",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "OBJECTID": "1", "LOCNUM": "130761877", "CONAME": "CHINA STEAK HOUSE", "STREET": "W 12TH AVE", "CITY": "HIALEAH", "STATE": "FL", "STATE_NAME": "Florida", "ZIP": "33012", "ZIP4": "4108", "NAICS": "72251117", "SIC": "581208", "SALESVOL": 728.0, "HDBRCH": null, "EMPNUM": 14.0, "FRNCOD": null, "ISCODE": "0", "SQFTCODE": "B", "LOC_NAME": "StreetAddress", "STATUS": "M", "SCORE": 100.0, "SOURCE": "INFOGROUP" }, "geometry": { "type": "Point", "coordinates": [ -80.306700000106161, 25.860500000337915 ] } },

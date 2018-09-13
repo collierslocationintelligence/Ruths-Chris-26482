@@ -1,6 +1,6 @@
-var json_RuthsChrisSteakHouses_2 = {
+var json_RuthsChrisSteakHouses_3 = {
 "type": "FeatureCollection",
-"name": "RuthsChrisSteakHouses_2",
+"name": "RuthsChrisSteakHouses_3",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "OBJECTID": "1", "LOCNUM": "403442011", "CONAME": "RUTH'S CHRIS STEAK HOUSE", "STREET": "NE MIZNER BLVD", "CITY": "BOCA RATON", "STATE": "FL", "STATE_NAME": "Florida", "ZIP": "33432", "ZIP4": "4079", "NAICS": "72251117", "SIC": "581208", "SALESVOL": 3426.0, "HDBRCH": "2", "EMPNUM": 65.0, "FRNCOD": "2", "ISCODE": "0", "SQFTCODE": "B", "LOC_NAME": "PointAddress", "STATUS": "M", "SCORE": 100.0, "SOURCE": "INFOGROUP" }, "geometry": { "type": "Point", "coordinates": [ -80.084099999662243, 26.352899999974905 ] } },
